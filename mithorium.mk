@@ -486,6 +486,13 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg_msm8937.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
 endif
 
+# Inherit MiThorium QCOM HALs
+ifeq ($(TARGET_KERNEL_VERSION),4.9)
+$(call inherit-product-if-exists, hardware/mithorium-4.9/mithorium_qcom_hals.mk)
+else ifeq ($(TARGET_KERNEL_VERSION),4.19)
+$(call inherit-product, hardware/mithorium-4.19/mithorium_qcom_hals.mk)
+endif
+
 # Inherit the proprietary files
 $(call inherit-product, vendor/xiaomi/mithorium-common/mithorium-common-vendor.mk)
 
